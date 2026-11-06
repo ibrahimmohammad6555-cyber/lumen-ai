@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ─────────────────────────────────────────────────── */
+:root {
+  /* Light theme */
+  --bg-primary: #f0f4ff;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-sidebar: #ffffff;
+  --border-color: rgba(79, 142, 247, 0.12);
+  --text-primary: #0a1628;
+  --text-secondary: #3d5a8a;
+  --text-muted: #6b82a8;
+  --accent-primary: #4f8ef7;
+  --accent-cyan: #06b6d4;
+  --accent-glow: rgba(79, 142, 247, 0.3);
+  --shadow-card: 0 4px 24px rgba(79, 142, 247, 0.08);
+  --surface-glass: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  /* Dark theme */
+  --bg-primary: #050d1a;
+  --bg-secondary: #070f21;
+  --bg-card: rgba(14, 30, 53, 0.8);
+  --bg-sidebar: #070f21;
+  --border-color: rgba(79, 142, 247, 0.15);
+  --text-primary: #e8f0fe;
+  --text-secondary: #94b4d8;
+  --text-muted: #5a7a9a;
+  --accent-primary: #4f8ef7;
+  --accent-cyan: #22d3ee;
+  --accent-glow: rgba(79, 142, 247, 0.4);
+  --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.5);
+  --surface-glass: rgba(14, 30, 53, 0.6);
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+/* ─── Glass card ─────────────────────────────────────────────────────── */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+  border-radius: 16px;
+}
+
+/* ─── Glow effects ───────────────────────────────────────────────────── */
+.glow-text {
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.glow-border {
+  box-shadow: 0 0 0 1px var(--accent-primary), 0 0 20px var(--accent-glow);
+}
+
+/* ─── Focus styles for accessibility ────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Utility ───────────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  text-decoration: none;
+  width: 100%;
+}
+
+.sidebar-nav-item:hover {
+  background: var(--accent-glow);
+  color: var(--accent-primary);
+  border-color: var(--border-color);
+}
+
+.sidebar-nav-item.active {
+  background: var(--accent-glow);
+  color: var(--accent-primary);
+  border-color: var(--border-color);
+  font-weight: 600;
+}
+
+/* ─── Demo data badge ───────────────────────────────────────────────── */
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(234, 179, 8, 0.15);
+  color: #ca8a04;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.dark .demo-badge {
+  background: rgba(234, 179, 8, 0.1);
+  color: #fbbf24;
+  border-color: rgba(234, 179, 8, 0.2);
+}
+
+/* ─── Stat card ─────────────────────────────────────────────────────── */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+  opacity: 0.6;
+}
+
+/* ─── 3D canvas container ───────────────────────────────────────────── */
+.canvas-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
